@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         go: [ '1.17.3' ]
@@ -16,4 +16,14 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go }}
-      - run: go run app.go
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+        with:
+          platform: x64
+      - name: setup env variables
+        env:
+            GOOS: windows
+            GOARCH: amd64
+      - name: get packages
+        run : go get github.com/webview/webview
+      - run: go build app.go
