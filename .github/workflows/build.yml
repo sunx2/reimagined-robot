@@ -22,3 +22,10 @@ jobs:
           platform: x64
       - run : go get github.com/webview/webview
       - run: go build app.go
+      - name: Auto commit
+        run: |
+            git config user.name "sunx2"
+            git config user.email "xxsunxxrose@gmail.com"
+            git add .
+            git commit -m "generated"
+            git push
