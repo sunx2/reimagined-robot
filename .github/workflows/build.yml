@@ -24,6 +24,5 @@ jobs:
         env:
             GOOS: windows
             GOARCH: amd64
-      - name: get packages
-        run : go get github.com/webview/webview
+      - run : go get github.com/webview/webview
       - run: go build app.go
